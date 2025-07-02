@@ -1,0 +1,197 @@
+/* Container */
+.registration-container {
+  max-width: 900px;
+  margin: 20px auto;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
+  padding: 0 20px;
+}
+
+/* Banner Image */
+.banner-section img.banner-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Content */
+.content-section {
+  padding: 30px 24px;
+}
+
+.webinar-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #222;
+  text-align: center;
+}
+
+.datetime {
+  color: #0073e6;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.form-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Form Styles */
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.form-row input {
+  flex: 1;
+}
+
+.registration-form input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.registration-form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.submit-button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Speaker Card */
+.speaker-card {
+  max-width: 900px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px 24px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
+}
+
+.speaker-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.speaker-info {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.speaker-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.speaker-details {
+  flex: 1;
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.designation {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.org {
+  font-weight: 500;
+}
+
+.link {
+  color: #0073e6;
+  text-decoration: none;
+}
+
+.description {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ✅ Responsive Adjustments */
+@media (max-width: 600px) {
+  .content-section {
+    padding: 20px 16px;
+  }
+
+  .webinar-title,
+  .datetime,
+  .form-title {
+    text-align: center;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .speaker-info {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .speaker-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .speaker-details {
+    width: 100%;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+}
