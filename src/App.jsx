@@ -13,40 +13,63 @@ function App() {
   });
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
+  };
+
+  const validate = () => {
+    const errs = {};
+    if (!formData.firstName.trim()) errs.firstName = "First Name is required";
+    if (!formData.lastName.trim()) errs.lastName = "Last Name is required";
+    if (!formData.email.trim()) {
+      errs.email = "Email is required";
+    } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)) {
+      errs.email = "Invalid email format";
+    }
+    if (!formData.phone.trim()) {
+      errs.phone = "Phone number is required";
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      errs.phone = "Phone number must be 10 digits";
+    }
+    return errs;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");
+    const errs = validate();
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      setLoading(false);
+      return;
+    }
 
     try {
-      const res = await fetch("http://localhost:8000/api/register-webinar", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/zoom/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
-      const { success } = await res.json();
+      const { status } = await res.json();
 
-      if (success === true) {
-        // setMessage("✅ Successfully registered!");
+      if (status === true) {
         toast.success("Successfully registered!");
         setFormData({ firstName: "", lastName: "", email: "", phone: "" });
       } else {
-        // setMessage(`❌ Error: ${data?.message || "Something went wrong"}`);
         toast.error(`❌ Error: ${data?.message || "Something went wrong"}`);
       }
     } catch (error) {
       console.error(error);
-      // setMessage("❌ Network or server error");
+
       toast.error("❌ Network or server error");
     } finally {
       setLoading(false);
@@ -74,53 +97,57 @@ function App() {
           <h3 className="form-title">Webinar Registration</h3>
 
           <form onSubmit={handleSubmit} className="registration-form">
-            <div className="form-row">
-              <input
-                type="text"
-                name="firstName"
-                autoComplete="off"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="text"
-                name="lastName"
-                autoComplete="off"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-column">
-              <input
-                type="email"
-                name="email"
-                autoComplete="off"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <input
-                type="tel"
-                name="phone"
-                autoComplete="off"
-                placeholder="Phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-              />
-            </div>
+            <input
+              type="text"
+              name="firstName"
+              autoComplete="off"
+              placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+            />
+
+            {errors.firstName && (
+              <span className="error">{errors.firstName}</span>
+            )}
+            <input
+              type="text"
+              name="lastName"
+              autoComplete="off"
+              placeholder="Last Name"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+            />
+            {errors.lastName && (
+              <span className="error">{errors.lastName}</span>
+            )}
+
+            <input
+              type="email"
+              name="email"
+              autoComplete="off"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            {errors.email && <span className="error">{errors.email}</span>}
+            <input
+              type="number"
+              name="phone"
+              autoComplete="off"
+              placeholder="Phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+            {errors.phone && <span className="error">{errors.phone}</span>}
 
             <button type="submit" className="submit-button">
               {loading ? "Submitting..." : "Register"}
             </button>
           </form>
-
-          {message && <p className="mt-4  text-base font-medium">{message}</p>}
         </div>
       </div>
 
