@@ -65,7 +65,7 @@ function App() {
         toast.success("Successfully registered!");
         setFormData({ firstName: "", lastName: "", email: "", phone: "" });
       } else {
-        toast.error(`❌ Error: ${data?.message || "Something went wrong"}`);
+        toast.error(`Something went wrong`);
       }
     } catch (error) {
       console.error(error);
