@@ -160,7 +160,7 @@ function App() {
           <div className="speaker-details">
             <h3 className="name">Amit Soni</h3>
             <p className="designation">
-              Founder & CEO – <span className="org">DhanXpert</span> ·{" "}
+              Co-Founder & CEO – <span className="org">DhanXpert</span> ·{" "}
               <a
                 href="https://dhanxpert.in"
                 target="_blank"
@@ -181,7 +181,7 @@ function App() {
               </div> */}
 
             <p className="description">
-              Amit Soni is the Founder & CEO of DhanXpert, India’s
+              Amit Soni is the Co-Founder & CEO of DhanXpert, India’s
               fastest-growing discovery platform for investors and Mutual Fund
               Distributors (MFDs). With over 10 years of experience in the
               financial and digital space, Amit has helped more than 1,000+ MFDs
